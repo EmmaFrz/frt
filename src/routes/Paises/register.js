@@ -8,18 +8,23 @@ const { Option } = Select;
 class Divisas extends React.Component{
 	
 	state = {
-		formValue:{	},
+		formValue:{	
+		},
 		token:localStorage.getItem("token"),
 		dataSource:[],
 	}
 
 	handleSubmit = (event) => {
 		event.preventDefault();
+		console.log(this.state.formValue)
+		let arr = []
+		arr.push(this.state.formValue.states)
+		console.info(arr)
 		axios.post(baseUrl,{
   		variables:{
   			name:this.state.formValue.name,
-  			currency:{id:this.state.formValue.currency},
-  			states:[...this.state.formValue.states]
+  			currency:this.state.formValue.currency,
+  			states:arr
   		},
   		query:`
 			mutation createNewCountry($name: String!, $currency: ID!, $states: [String!]!){
@@ -27,7 +32,9 @@ class Divisas extends React.Component{
 			    id,
 			    name,   
 			    currency{
-			    	id
+			    	id,
+			    	name,
+			    	short
 			    } ,
 			    states,
 			  }
@@ -40,19 +47,19 @@ class Divisas extends React.Component{
   		},  		
 		}).then((data) => {
 			console.log(data.data)
-			//this.props.history.push('/paises');
+			this.props.history.push('/paises');
 		}).catch((err) => {
 			console.log(err.message)
 		})
 	}
 
 	handleChange = (event) => {
-		this.setState({
-			formValue:{
-				...this.state.formValue,
-				[event.target.name]:event.target.value
-		}
-		});
+			this.setState({
+				formValue:{
+					...this.state.formValue,
+					[event.target.name]:event.target.value,
+				}
+			})
 	}
 
 	handleCurrencyChange = (event) => {

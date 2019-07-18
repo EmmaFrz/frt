@@ -13,13 +13,13 @@ const columns = [
   },
   {
     title: 'Moneda',
-    dataIndex: 'short',
-    key: 'short',
+    dataIndex: 'currency.name',
+    key: 'currency.name',
   },
   {
     title: 'Estado',
-    dataIndex: 'short',
-    key: 'short',
+    dataIndex: 'state',
+    key: 'state',
   }  
 ];
 
@@ -28,27 +28,33 @@ class Sucursales extends React.Component{
     dataSource:[]
   }
 
-  /*componentDidMount(){
+  componentDidMount(){
     axios.post(baseURL,{
       query:`
         {
-          currencies{
+          countries{
             edges{
               name,
-              short,
-              id
+              currency{
+                name,
+                short,
+                id
+              },
+              states
             }
           }
         }
       `
     }).then((res) => {
       this.setState({
-        dataSource:res.data.data.currencies.edges
+        dataSource:res.data.data.countries.edges
       })
+      console.log(res)
+      console.log(this.state.dataSource)
     }).catch((err) =>{
       console.log(err.message)
     })
-  }*/
+  }
 
   render(){
   return (
