@@ -1,101 +1,61 @@
 import React from "react";
 import {Form, Table, Button,Icon, DatePicker, Select, Input, Card, Col, Row } from "antd";
 import {Link} from 'react-router-dom'
+import axios from 'axios';
+const baseURL = 'http://74.127.61.115:9900/graphql';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 const columns = [
   {
-    title: 'Id',
-    dataIndex: 'id',
-    key: 'id',
-  },
-  {
     title: 'Nombre del banco',
-    dataIndex: 'banco',
-    key: 'banco',
+    dataIndex: 'name',
+    key: 'name',
   },
   {
-    title: 'Numero de cuenta',
-    dataIndex: 'num_cuenta',
-    key: 'num_cuenta',
+    title: 'Moneda asociada',
+    dataIndex: 'country.currency.name',
+    key: 'country.currency.name',
   },
   {
-    title: 'Nombre asociado',
-    dataIndex: 'asociado',
-    key: 'asociado',
-  },
-  {
-    title: 'Numero del asociado',
-    dataIndex: 'num',
-    key: 'num',
-  },  
-  {
-    title: 'Pais del banco',
-    dataIndex: 'pais_banco',
-    key: 'pais_banco',
-  }
+    title: 'Pais Asociado',
+    dataIndex: 'country.name',
+    key: 'country.name',
+  }, 
 ];
 
-const dataSource = [
-  {
-    key: '1',
-    id:1,
-    num_cuenta: 25443711,
-    asociado: 'Emmanuel José',
-    banco: 'BANESCO',
-    pais_banco:'Venezuela',
-    num:25447895
-  },
-  {
-    key: '2',
-    id:2,
-    num_cuenta: 789654123,
-    asociado: 'Miguel MArtinez',
-    banco: 'Banco Fallabela',
-    pais_banco:'Chile',
-    num:96485226
-  },
-  {
-    key: '3',
-    id:3,
-    num_cuenta: 123456789,
-    asociado: 'Simon Salazar',
-    banco: 'BANCOLOMBIA',
-    pais_banco:'Colombia',
-    num:26845987
-  }   
-
-    ]
 class Bancos extends React.Component{
   state = {
-    dataSource:dataSource
+    dataSource:[],
   }
-  filterName = (asoc,name) => {
-    this.setState({dataSource:dataSource})
-    let newMap = [];
-    this.state.dataSource.map((data) => {
-      if(data.banco === name){
-        newMap.push(data) 
-      }
-      if(data.asociado === asoc){
-        newMap.push(data) 
-      }
-    })
-
-    return newMap
-  }
-
-  handlSubmit = (event) => {
-    event.preventDefault();
-    let datos = this.filterName(event.target.asociado.value,event.target.nombre.value)
-    this.setState({
-      dataSource:datos
-    })
-    if (event.target.nombre.value === '' && event.target.asociado.value === '') {
+  componentDidMount(){
+    axios.post(baseURL,{
+      query:`
+        { 
+          banks{
+            edges{
+              id,
+              name,
+              country{
+                name,
+                id,
+                currency{
+                  id,
+                  name,
+                  short
+                }
+              }
+            }
+          }
+        }
+      `
+    }).then((res) => {
       this.setState({
-        dataSource:dataSource
+        dataSource:res.data.data.banks.edges
       })
-    }
+      console.log(res.data.data)
+    }).catch((err) =>{
+      console.log(err.message)
+    })
   }
 
   render(){
