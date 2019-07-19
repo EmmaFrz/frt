@@ -21,9 +21,9 @@ const initialSettings = {
   width: window.innerWidth,
   isDirectionRTL: false,
   locale: {
-    languageId: 'english',
-    locale: 'en',
-    name: 'English',
+    languageId: 'español',
+    locale: 'es',
+    name: 'Español',
     icon: 'us'
   }
 };
