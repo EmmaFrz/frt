@@ -7,23 +7,23 @@ import {
   THEME_COLOR_SELECTION,
   THEME_COLOR_SELECTION_PRESET,
   THEME_TYPE,
-  THEME_TYPE_LITE
+  THEME_TYPE_SEMI_DARK
 } from "../../constants/ThemeSetting";
 
 const initialSettings = {
   navCollapsed: true,
   navStyle: NAV_STYLE_FIXED,
   layoutType: LAYOUT_TYPE_FULL,
-  themeType: THEME_TYPE_LITE,
+  themeType: THEME_TYPE_SEMI_DARK,
   colorSelection: THEME_COLOR_SELECTION_PRESET,
 
   pathname: '',
   width: window.innerWidth,
   isDirectionRTL: false,
   locale: {
-    languageId: 'english',
-    locale: 'en',
-    name: 'English',
+    languageId: 'español',
+    locale: 'es',
+    name: 'Español',
     icon: 'us'
   }
 };

@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 const Bancos = () => {
   return (
   	<div style={{padding: '30px' }}>
-      <h3>Tú Seccion de registro de nuevos usuarios</h3>	  
+      <h3>Nuevos usuarios</h3>	  
 		<Link to='/usuarios'>Regresar <Icon type="undo" /></Link>			
 		<Form layout='vertical' >
 			<Form.Item label="Nombre de usuario">
