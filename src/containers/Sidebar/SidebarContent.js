@@ -73,7 +73,11 @@ class SidebarContent extends Component {
               <Menu.Item key="paises">
                 <Link to="/paises"><Icon type="global" />
                   <IntlMessages id="Paises"/></Link>
-              </Menu.Item>               
+              </Menu.Item> 
+              <Menu.Item key="cambios">
+                <Link to="/cambios"><Icon type="account-book" />
+                  <IntlMessages id="Tasas"/></Link>
+              </Menu.Item>                             
               <Menu.Item key="reportes">
                 <Link to="/reportes"><Icon type="form" />
                   <IntlMessages id="Reportes"/></Link>
