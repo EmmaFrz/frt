@@ -1,111 +1,75 @@
 import React from "react";
 import {Form, Table, Button,Icon, DatePicker, Select, Input, Card, Col, Row } from "antd";
 import {Link} from 'react-router-dom'
+import axios from 'axios';
+const baseURL = 'http://74.127.61.115:9900/graphql';
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 const columns = [
   {
-    title: 'Id',
-    dataIndex: 'id',
-    key: 'id',
-  },
-  {
     title: 'Nombre de la sucursal',
-    dataIndex: 'sucursal',
-    key: 'sucursal',
+    dataIndex: 'name',
+    key: 'name',
   },
   {
     title: 'Direccion',
-    dataIndex: 'direccion',
-    key: 'direccion',
-  },
-  {
-    title: 'Email',
-    dataIndex: 'email',
-    key: 'email',
-  },
-  {
-    title: 'Telefono',
-    dataIndex: 'telefono',
-    key: 'telefono',
-  },
-  {
-    title: 'Codigo Postal',
-    dataIndex: 'zip',
-    key: 'zip',
+    dataIndex: 'address',
+    key: 'address',
   },
   {
     title: 'Pais',
-    dataIndex: 'pais_sucursal',
-    key: 'pais_sucursal',
-  }     
-];
-const dataSource = [
+    dataIndex: 'country.name',
+    key: 'country.name',
+  },  
   {
-    key: '1',
-    id:1,
-    sucursal: 'Sucursal Nueva fortuna',
-    direccion: 'avenida ABC',
-    email: 'sucursal@example.com',
-    telefono:'+58123456789',
-    zip:252525,
-    pais_sucursal:'Venezuela'
+    title: 'Estado',
+    dataIndex: 'state',
+    key: 'state',
   },
   {
-    key: '2',
-    id:2,
-    sucursal: 'Sucursal Nueva fortuna 2',
-    direccion: 'avenida ABC2',
-    email: 'sucursal2@example.com',
-    telefono:'+56123456789',
-    zip:252525  ,
-    pais_sucursal:'Chile'
-  },
-  {
-    key: '3',
-    id:3,
-    sucursal: 'Sucursal Nueva fortuna 3',
-    direccion: 'avenida ABC3',
-    email: 'sucursa3l@example.com',
-    telefono:'+52123456789',
-    zip:353535,
-    pais_sucursal:'Mexico'
-  }, 
-
+    title: 'Moneda aceptada',
+    dataIndex: 'country.currency.name',
+    key: 'country.currency.name',
+  },  
 ];
 class Sucursales extends React.Component{
   state ={
-    dataSource: dataSource
+    dataSource: []
   }
 
-  filterName = (zip,name,obj) => {
-    let newMap = [];
-    obj.map((data) => {
-      if(data.sucursal === name){
-        newMap.push(data) 
-      }
-      if (data.zip == zip) {
-        newMap.push(data)
-      }
-    })
-
-    return newMap
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    console.info(event.target.zip.value)
-    let datos = this.filterName(event.target.zip.value,event.target.nombre.value,this.state.dataSource)
-    this.setState({
-      dataSource:datos
-    })
-    if (event.target.nombre.value === '' && event.target.zip.value === '') {
-      this.setState({
-        dataSource:dataSource
+  componentDidMount(){
+      axios.post(baseURL,{
+        query:`
+           {
+            branchOffices{
+              edges{
+                id,
+                name,
+                country{
+                  id,
+                  name,
+                  currency{
+                    id,
+                    name,
+                    short
+                  }
+                },
+                state,
+                address
+              },
+            }
+          }
+        `
+      }).then((res) => {
+        this.setState({
+          dataSource:res.data.data.branchOffices.edges
+        })
+        console.log(res)
+        console.log(this.state.dataSource)
+      }).catch((err) =>{
+        console.log(err.message)
       })
-    }  
   }
-
   render(){
   return (
     <div style={{padding: '30px' }}>
@@ -139,8 +103,10 @@ class Sucursales extends React.Component{
             </Form>
         </Card>
       </Col>                
-      <center><Table columns={columns} dataSource={this.state.dataSource}/></center>
       </Row>
+        <div>
+          <Table columns={columns} dataSource={this.state.dataSource}/>
+        </div>      
     </div>
   );
 };
