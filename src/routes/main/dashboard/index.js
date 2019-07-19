@@ -48,7 +48,7 @@ const columns = [
     key: 'monto_enviado',
   },
   {
-    title: 'Estatus Transaccion',
+    title: 'Estatus Transaccion ',
     dataIndex: 'status',
     key: 'status',
   },
