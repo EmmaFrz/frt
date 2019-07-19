@@ -1,8 +1,7 @@
 import React from "react";
-import {Form, Table, Button,Icon, DatePicker, Select, Input, Card, Col, Row } from "antd";
+import {Form, Table, Button,Icon, DatePicker, Input, Card, Col, Row } from "antd";
 import {Link} from 'react-router-dom'
 const { RangePicker } = DatePicker;
-const { Option } = Select;
 const columns = [
   {
     title: 'Id',
@@ -107,48 +106,13 @@ class Transacciones extends React.Component{
     dataSource:dataSource
   }
 
-  filterName = (bank,name) => {
-    this.setState({dataSource:dataSource})
-    let newMap = [];
-    this.state.dataSource.map((data) => {
-      if(data.nombre === name){
-        newMap.push(data) 
-      }
-      if(data.banco === bank){
-        newMap.push(data) 
-      }     
-      if(data.nombre_receptor === name){
-        newMap.push(data) 
-      }      
-    })
-
-    return newMap
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    let datos = this.filterName(event.target.banco.value,event.target.nombre.value)
-    this.setState({
-      dataSource:datos
-    })
-    if (event.target.nombre.value === '' && event.target.banco.value === '') {
-      this.setState({
-        dataSource:dataSource
-      })
-    }    
-  }
-
-  handleChange = (event) => {
-
-  }
-
   render(){
     return (
       <div style={{padding: '30px' }}>
       <h3>Tú seccion de Transacciones</h3>
         <Row gutter={16}>
           <Col span={8}>
-            <Card title="Tasa de cambio" extra={<a href="#">Actualizar <Icon type="reload" /></a>} style={{ height:200, width: 300 }}>
+            <Card title="Tasa de cambio" extra={<Link to="/transacciones">Actualizar <Icon type="reload" /></Link>} style={{ height:200, width: 300 }}>
               <h2><center>8.000 VEF</center></h2>
               <p>Datos pueden cambiar segun avance el dia</p>
             </Card> 

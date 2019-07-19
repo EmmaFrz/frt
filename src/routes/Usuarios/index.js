@@ -1,8 +1,6 @@
 import React from "react";
-import {Form, Table, Button,Icon, DatePicker, Select, Input, Card, Col, Row } from "antd";
+import {Form, Table, Button,Icon, Input, Card, Col, Row } from "antd";
 import {Link} from 'react-router-dom'
-const { RangePicker } = DatePicker;
-const { Option } = Select;
 const columns = [
   {
     title: 'Id',
@@ -69,42 +67,9 @@ const dataSource = [
 
 ];
 class Usuarios extends React.Component{
-  state ={
+  state = {
     dataSource:dataSource
   }
-
-  handleChange = (event,datestring) => {
-    console.log(datestring)
-  }
-
-filterName = (dni,name,obj) => {
-    this.setState({dataSource:[]})
-    let newMap = [];
-    obj.map((data) => {
-      if(data.sucursal === name){
-        newMap.push(data) 
-      }
-      if (data.direccion == dni) {
-        newMap.push(data)
-      }
-    })
-
-    return newMap
-  }
-
-  handleSubmit = (event) => {
-    this.setState({dataSource:[]})    
-    event.preventDefault();
-    let datos = this.filterName(event.target.dni.value,event.target.nombre.value,this.state.dataSource)
-    this.setState({
-      dataSource:datos
-    })
-    if (event.target.nombre.value === '' && event.target.dni.value === '') {
-      this.setState({
-        dataSource:dataSource
-      })
-    }  
-  }  
 
   render(){
     return (
@@ -112,7 +77,7 @@ filterName = (dni,name,obj) => {
         <h3>Tú Seccion de Usuarios asociadas</h3>
         <Row gutter={16}>
           <Col span={8}>
-            <Card title="Tasa de cambio" extra={<a href="#">Actualizar <Icon type="reload" /></a>} style={{ height:200, width: 300 }}>
+            <Card title="Tasa de cambio" extra={<Link to="/usuarios">Actualizar <Icon type="reload" /></Link>} style={{ height:200, width: 300 }}>
               <h2><center>8.000 VEF</center></h2>
               <p>Datos pueden cambiar segun avance el dia</p>
             </Card> 

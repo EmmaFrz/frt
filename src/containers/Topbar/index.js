@@ -1,14 +1,10 @@
 import React, {Component} from "react";
-import {Layout, Popover} from "antd";
+import {Layout} from "antd";
 import {Link} from "react-router-dom";
 
 import CustomScrollbars from "util/CustomScrollbars";
 import languageData from "./languageData";
 import {switchLanguage, toggleCollapsedSideNav} from "../../appRedux/actions/Setting";
-import SearchBox from "components/SearchBox";
-import UserInfo from "components/UserInfo";
-import AppNotification from "components/AppNotification";
-import MailNotification from "components/MailNotification";
 import Auxiliary from "util/Auxiliary";
 
 
@@ -45,7 +41,7 @@ class Topbar extends Component {
 
 
   render() {
-    const {locale, width, navCollapsed, navStyle} = this.props;
+    const {width, navCollapsed, navStyle} = this.props;
     return (
       <Auxiliary>
         <Header>

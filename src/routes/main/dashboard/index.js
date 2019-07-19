@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, Table, Button, Icon, DatePicker, Select, Input, Card, Col, Row, Tabs } from "antd";
-import { Link } from 'react-router-dom';
 import { pending, done, rejected, cities } from "./data";
 const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;
