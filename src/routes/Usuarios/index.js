@@ -139,8 +139,8 @@ filterName = (dni,name,obj) => {
               </Form>
           </Card>
         </Col>                
-        <center><Table columns={columns} dataSource={this.state.dataSource}/></center>
         </Row>
+        <center><Table columns={columns} dataSource={this.state.dataSource}/></center>
       </div>
     );
   };

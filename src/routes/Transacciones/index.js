@@ -178,8 +178,8 @@ class Transacciones extends React.Component{
               </Form>
           </Card>
         </Col>                
-        <Table columns={columns} dataSource={this.state.dataSource}/>
         </Row>
+        <Table columns={columns} dataSource={this.state.dataSource}/>
       </div>
     );
   };  

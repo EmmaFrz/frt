@@ -7,20 +7,25 @@ const { RangePicker } = DatePicker;
 const { Option } = Select;
 const columns = [
   {
-    title: 'Nombre del banco',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Valor del dia',
+    dataIndex: 'value',
+    key: 'value',
   },
   {
-    title: 'Moneda asociada',
-    dataIndex: 'country.currency.name',
-    key: 'country.currency.name',
+    title: 'Pais de origen',
+    dataIndex: 'origin_country.name',
+    key: 'origin_country.name',
   },
   {
-    title: 'Pais Asociado',
-    dataIndex: 'country.name',
-    key: 'country.name',
-  }, 
+    title: 'Pais destino',
+    dataIndex: 'destination_country.name',
+    key: 'destination_country.name',
+  },
+  {
+    title: 'Valido hasta',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+  },   
 ];
 
 class Bancos extends React.Component{
@@ -30,27 +35,43 @@ class Bancos extends React.Component{
   componentDidMount(){
     axios.post(baseURL,{
       query:`
-        { 
-          banks{
-            edges{
-              id,
-              name,
-              country{
-                name,
+          {
+            exchanges{
+              edges{
                 id,
-                currency{
+                value,
+                origin_country{
                   id,
                   name,
-                  short
-                }
-              }
+                  currency{
+                    id,
+                    name,
+                    short
+                  },
+                  states
+                },
+                destination_country{
+                  id,
+                  name,
+                  currency{
+                    id,
+                    name,
+                    short
+                  },
+                  states
+                },
+                createdAt
+              },
+              pageInfo{
+                hasNextPage,
+                endCursor
             }
           }
         }
       `
     }).then((res) => {
       this.setState({
-        dataSource:res.data.data.banks.edges
+        dataSource:res.data.data.exchanges.edges
       })
       console.log(res.data.data)
     }).catch((err) =>{
@@ -61,7 +82,7 @@ class Bancos extends React.Component{
   render(){
     return (
       <div style={{padding: '30px' }}>
-        <h3>Tú Seccion de bancos asociados</h3>
+        <h3>Tú Seccion de tasas de cambio asociados</h3>
         <Row gutter={16}>
           <Col span={8}>
             <Card title="Tasa de cambio" extra={<a href="#">Actualizar <Icon type="reload" /></a>} style={{ height:200, width: 300 }}>
@@ -70,12 +91,12 @@ class Bancos extends React.Component{
             </Card> 
           </Col>
           <Col span={8}>        
-          <Card  title="Busqueda Inteligente" extra={<Link to='/bancos/registro'>Nuevo Banco <Icon type="plus-circle" /></Link>} style={{ height:200, width: 650 }}>
-            <Form layout='inline' onSubmit={this.handlSubmit}>
-                <Form.Item label="Nombre del Banco">
+          <Card  title="Busqueda Inteligente" extra={<Link to='/cambios/registro'>Nueva tasa de cambio <Icon type="plus-circle" /></Link>} style={{ height:200, width: 650 }}>
+            <Form layout='inline'>
+                <Form.Item label="Pais origen">
                   <Input name='nombre'/>
                 </Form.Item>          
-                <Form.Item label="Nombre del asociado">
+                <Form.Item label="Pais destino">
                   <Input name='asociado'/>                  
                 </Form.Item>
                 <Form.Item
