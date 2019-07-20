@@ -19,7 +19,7 @@ class BancoCreate extends React.Component{
 		axios.post(baseURL,{
   		variables:{
   			value:parseInt(this.state.formValue.name),
-  			origin_country:this.state.formValue.destination_country,
+  			origin_country:this.state.formValue.origin_country,
   			destination_country:this.state.formValue.destination_country
   		},
   		query:`

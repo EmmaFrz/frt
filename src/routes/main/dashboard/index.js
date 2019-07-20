@@ -61,7 +61,7 @@ const Dashboard = () => {
           <Card title="Busqueda por ciudades" style={{ height: 300, width: "100%" }}>
             <Form layout='inline' style={{ width: "100%" }}>
               <Form.Item style={{ width: '100%' }} label="Ciudad a buscar">
-                <Select style={{width:'100%'}}>
+                <Select defaultValue="Seleccione ciudad" style={{width:120}}>
                   {cities.map(city => (
                     <Option key={city} value={city}>{city}</Option>
                   ))}
@@ -93,7 +93,7 @@ const Dashboard = () => {
           </Card>
         </Col>
         <Col span={24}>
-          <Card style={{ height: 400, width: '100%' }}>
+          <Card style={{width: '100%' }}>
             <h2>Reportes de transacciones pendietes</h2>
             <Tabs defaultActiveKey="1">
               <TabPane tab="Pendientes" key="1">

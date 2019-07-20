@@ -50,44 +50,44 @@ class SidebarContent extends Component {
               theme={themeType === THEME_TYPE_LITE ? 'lite' : 'dark'}
               mode="inline">
 
-              <Menu.Item key="home">
-                <Link to="/home"><Icon type="home" />
+              <Menu.Item key="home" >
+                <Link to="/home"><Icon type="home" style={{color:'#d88f2f'}}/>
                   <IntlMessages id="Inicio"/></Link>
               </Menu.Item>
-              <Menu.Item key="transacciones">
-                <Link to="/transacciones"><Icon type="transaction" />
+              <Menu.Item key="transacciones" >
+                <Link to="/transacciones"><Icon type="transaction" style={{color:'#d88f2f'}} />
                   <IntlMessages id="Transacciones"/></Link>
               </Menu.Item>
-              <Menu.Item key="divisas">
-                <Link to="/divisas"><Icon type="pound" />
+              <Menu.Item key="divisas" >
+                <Link to="/divisas"><Icon type="pound" style={{color:'#d88f2f'}} />
                   <IntlMessages id="Divisas"/></Link>
               </Menu.Item>              
-              <Menu.Item key="bancos">
-                <Link to="/bancos"><Icon type="bank" />
+              <Menu.Item key="bancos" >
+                <Link to="/bancos"><Icon type="bank" style={{color:'#d88f2f'}} />
                   <IntlMessages id="Bancos"/></Link>
               </Menu.Item>
-              <Menu.Item key="sucursales">
-                <Link to="/sucursales"><Icon type="apartment" />
+              <Menu.Item key="sucursales" >
+                <Link to="/sucursales"><Icon type="apartment" style={{color:'#d88f2f'}} />
                   <IntlMessages id="Sucursales"/></Link>
               </Menu.Item> 
-              <Menu.Item key="paises">
-                <Link to="/paises"><Icon type="global" />
+              <Menu.Item key="paises" >
+                <Link to="/paises"><Icon type="global" style={{color:'#d88f2f'}} />
                   <IntlMessages id="Paises"/></Link>
               </Menu.Item> 
-              <Menu.Item key="cambios">
-                <Link to="/cambios"><Icon type="account-book" />
+              <Menu.Item key="cambios" >
+                <Link to="/cambios"><Icon type="account-book" style={{color:'#d88f2f'}} />
                   <IntlMessages id="Tasas"/></Link>
               </Menu.Item>                             
-              <Menu.Item key="reportes">
-                <Link to="/reportes"><Icon type="form" />
+              <Menu.Item key="reportes" > 
+                <Link to="/reportes"><Icon type="form" style={{color:'#d88f2f'}} />
                   <IntlMessages id="Reportes"/></Link>
               </Menu.Item>
-              <Menu.Item key="usuarios">
-                <Link to="/usuarios"><Icon type="usergroup-add" />
+              <Menu.Item key="usuarios" >
+                <Link to="/usuarios"><Icon type="usergroup-add" style={{color:'#d88f2f'}} />
                   <IntlMessages id="Usuarios"/></Link>
               </Menu.Item>
-              <Menu.Item key="configuraciones">
-                <Link to="/configuraciones"><Icon type="setting" />
+              <Menu.Item key="configuraciones" >
+                <Link to="/configuraciones"><Icon type="setting" style={{color:'#d88f2f'}} />
                   <IntlMessages id="Configuracion"/></Link>
               </Menu.Item>                                                                                   
             </Menu>
