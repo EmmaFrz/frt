@@ -2,8 +2,8 @@ import React from "react";
 import {Form, Button,Icon,Input, Select} from "antd";
 import {Link} from 'react-router-dom'
 import axios from 'axios';
+import { baseURL } from 'util/environment';
 const { Option } = Select
-const baseURL = 'http://74.127.61.115:9900/graphql';
 
 class BancoCreate extends React.Component{
 	state = {
@@ -97,6 +97,7 @@ class BancoCreate extends React.Component{
 	}
 
 	render(){
+		console.log(baseURL.baseURL)
 	  return (
 	  	<div style={{padding: '30px' }}>
 	      <h3>Tú Seccion de registro de bancos asociados</h3>	  
@@ -109,7 +110,7 @@ class BancoCreate extends React.Component{
 					<Select defaultValue="Seleccion" onChange={this.handleSelectChange}>
 						{this.state.countries.map((data) => {
 							return(
-								<Option value={data.id}>{data.name}</Option>
+								<Option key={data.id} value={data.id}>{data.name}</Option>
 							)
 						})}
 					</Select>

@@ -1,10 +1,8 @@
 import React from "react";
-import {Form, Table, Button,Icon, DatePicker, Select, Input, Card, Col, Row } from "antd";
+import {Form, Table, Button,Icon, Input, Card, Col, Row } from "antd";
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-const baseURL = 'http://74.127.61.115:9900/graphql';
-const { RangePicker } = DatePicker;
-const { Option } = Select;
+import { baseURL } from 'util/environment';
 const columns = [
   {
     title: 'Nombre de la divisa',
@@ -51,7 +49,7 @@ class Sucursales extends React.Component{
       <h3>Tú Seccion de Divisas asociadas</h3>
       <Row gutter={16}>
         <Col span={8}>
-          <Card title="Tasa de cambio" extra={<a href="#">Actualizar <Icon type="reload" /></a>} style={{ height:170, width: 300 }}>
+          <Card title="Tasa de cambio" extra={<Link to="#">Actualizar <Icon type="reload" /></Link>} style={{ height:170, width: 300 }}>
             <h2><center>8.000 VEF</center></h2>
             <p>Datos pueden cambiar segun avance el dia</p>
           </Card> 
@@ -77,7 +75,7 @@ class Sucursales extends React.Component{
         </Col>   
       </Row>             
       <div>
-        <center><Table columns={columns} dataSource={this.state.dataSource}/></center>        
+        <Table columns={columns} dataSource={this.state.dataSource} rowKey={this.state.dataSource.id}/>        
       </div>
     </div>
   );

@@ -2,8 +2,8 @@ import React from "react";
 import {Form, Button,Icon,Input, Select} from "antd";
 import {Link} from 'react-router-dom'
 import axios from 'axios';
+import { baseURL } from 'util/environment';
 const { Option } = Select
-const baseURL = 'http://74.127.61.115:9900/graphql';
 
 
 class SucursalRegister extends React.Component{

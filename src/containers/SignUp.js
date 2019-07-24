@@ -86,10 +86,9 @@ class SignUp extends React.Component {
                 </FormItem>
                 <FormItem>
                   <Button type="primary" className="gx-mb-0" htmlType="submit">
-                    <IntlMessages id="app.userAuth.signUp"/>
+                    Registrate
                   </Button>
-                  <span><IntlMessages id="app.userAuth.or"/></span> <Link to="/signin"><IntlMessages
-                  id="app.userAuth.signIn"/></Link>
+                  <Link to="/signin">Inicia Sesion</Link>
                 </FormItem>
               </Form>
             </div>

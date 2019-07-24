@@ -2,7 +2,7 @@ import React from "react";
 import {Form, Button,Icon,Input} from "antd";
 import {Link} from 'react-router-dom'
 import axios from 'axios';
-const baseUrl = 'http://74.127.61.115:9900/graphql';
+import { baseURL } from 'util/environment';
 
 class Divisas extends React.Component{
 	
@@ -13,7 +13,7 @@ class Divisas extends React.Component{
 	handleSubmit = (event) => {
 		console.log(this.state.token)
 		event.preventDefault();
-		axios.post(baseUrl,{
+		axios.post(baseURL,{
   		variables:{
   			name:this.state.formValue.name,
   			short:this.state.formValue.short

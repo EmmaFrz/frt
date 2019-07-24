@@ -69,20 +69,15 @@ class SignIn extends React.Component {
                     valuePropName: 'checked',
                     initialValue: true,
                   })(
-                    <Checkbox><IntlMessages id="appModule.iAccept"/></Checkbox>
+                    <Checkbox>Recuerdame</Checkbox>
                   )}
-                  <span className="gx-signup-form-forgot gx-link"><IntlMessages
-                    id="appModule.termAndCondition"/></span>
                 </FormItem>
                 <FormItem>
                   <Button type="primary" className="gx-mb-0" htmlType="submit">
-                    <IntlMessages id="app.userAuth.signIn"/>
+                    Iniciar sesion
                   </Button>
-                  <span><IntlMessages id="app.userAuth.or"/></span> <Link to="/signup"><IntlMessages
-                  id="app.userAuth.signUp"/></Link>
+                  <span><IntlMessages id="app.userAuth.or"/></span> <Link to="/signup">Registrate</Link>
                 </FormItem>
-                <span
-                  className="gx-text-light gx-fs-sm"> demo user email: 'demo@example.com' and password: 'demo#123'</span>
               </Form>
             </div>
             <InfoView/>

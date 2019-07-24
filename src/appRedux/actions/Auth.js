@@ -8,7 +8,7 @@ import {
   USER_TOKEN_SET
 } from "../../constants/ActionTypes";
 import axios from 'axios';
-const baseURL = 'http://74.127.61.115:9900/graphql';
+import {baseURL} from 'util/environment';
 export const setInitUrl = (url) => {
   return {
     type: INIT_URL,
@@ -34,11 +34,11 @@ export const userSignUp = ({email, password, name}) => {
       `
     }).then(({data}) => {
       if (data.data) {
-        localStorage.setItem("token", data.data.signUp.token);
+        localStorage.setItem("token",data.data.signUp.token);
         axios.defaults.headers.common['x-token'] = data.data.signUp.token;
         axios.defaults.headers.common['token'] = data.data.signUp.token;
         dispatch({type: FETCH_SUCCESS});
-        dispatch({type: USER_TOKEN_SET, payload: data.data.signUp.token});
+        dispatch({type: USER_TOKEN_SET, payload: JSON.stringify(data.data.signUp.token)});
       } else {
         console.log("payload: data.error", data);
         dispatch({type: FETCH_ERROR, payload: "Network Error"});
@@ -68,7 +68,7 @@ export const userSignIn = ({username, password}) => {
     ).then(({data}) => {
       console.log(data.data)
       if (data.data) {
-        localStorage.setItem("token", data.data.signIn.token);
+        localStorage.setItem("token", JSON.stringify(data.data.signIn.token));
         axios.defaults.headers.common['x-token'] = data.data.signIn.token;
         axios.defaults.headers.common['token'] = data.data.signIn.token;
         dispatch({type: FETCH_SUCCESS});
@@ -93,12 +93,9 @@ export const getUser = () => {
       if (data.result) {
         dispatch({type: FETCH_SUCCESS});
         dispatch({type: USER_DATA, payload: data.user});
-      } else {
-        dispatch({type: FETCH_ERROR, payload: data.error});
       }
     }).catch(function (error) {
       dispatch({type: FETCH_ERROR, payload: error.message});
-      console.log("Error****:", error.message);
     });
   }
 };

@@ -2,7 +2,7 @@ import React from "react";
 import {Form, Button, Icon, Input, Select, } from "antd";
 import {Link} from 'react-router-dom'
 import axios from 'axios';
-const baseUrl = 'http://74.127.61.115:9900/graphql';
+import { baseURL } from 'util/environment';
 const { Option } = Select;
 
 class Divisas extends React.Component{
@@ -20,7 +20,7 @@ class Divisas extends React.Component{
 		let arr = []
 		arr.push(this.state.formValue.states)
 		console.info(arr)
-		axios.post(baseUrl,{
+		axios.post(baseURL,{
   		variables:{
   			name:this.state.formValue.name,
   			currency:this.state.formValue.currency,
@@ -73,7 +73,7 @@ class Divisas extends React.Component{
 
 
 	componentDidMount(){
-		axios.post(baseUrl,{
+		axios.post(baseURL,{
 		  query:`
 		    {
 		      currencies{
