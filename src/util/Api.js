@@ -4,7 +4,6 @@ export const apiUrl = 'http://localhost:8000/graphql';
 
 export default axios.create({
   headers: {
-    'Content-Type': 'application/json',
-    'x-token': localStorage.getItem('token') || ''
+    'Content-Type': 'application/json'
   }
 });

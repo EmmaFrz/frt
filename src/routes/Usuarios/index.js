@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Table, Button, Icon, Input, Card, Col, Row, message } from "antd";
 import { Link } from 'react-router-dom'
-import UserService from "../../services/user.service";
+import { UserService } from "../../services/config.service";
 
 class Usuarios extends React.Component {
 
@@ -16,10 +16,9 @@ class Usuarios extends React.Component {
   fetchUsers = () => {
     UserService.getUsers()
       .then(users => {
-        console.log(users);
-        //this.setState({ users });
-      })
-      .catch(error => message.error('Ha ocurrido un error al solicitar los usuarios.'));
+        this.setState({ users: users.data.users });
+      }, err => { message.error(err.toString()) })
+
   }
 
   render() {
@@ -63,11 +62,6 @@ class Usuarios extends React.Component {
 }
 
 const columns = [
-  {
-    title: 'Id',
-    dataIndex: 'id',
-    key: 'id',
-  },
   {
     title: 'Usuario',
     dataIndex: 'username',

@@ -68,9 +68,8 @@ export const userSignIn = ({username, password}) => {
     ).then(({data}) => {
       console.log(data.data)
       if (data.data) {
-        localStorage.setItem("token", JSON.stringify(data.data.signIn.token));
+        localStorage.setItem("token", data.data.signIn.token);
         axios.defaults.headers.common['x-token'] = data.data.signIn.token;
-        axios.defaults.headers.common['token'] = data.data.signIn.token;
         dispatch({type: FETCH_SUCCESS});
         dispatch({type: USER_TOKEN_SET, payload: data.data.signIn.token});
         this.props.history.push('/')

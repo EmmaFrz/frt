@@ -9,5 +9,25 @@ export default {
         dni
       }
     }
+  `,
+  GET_COUNTRIES: `
+    query getAllCountries($cursor: String, $limit: Int) {
+      countries(cursor: $cursor, limit: $limit){
+        edges{
+          name,
+          currency{
+            name,
+            short,
+            id
+          },
+          states
+        },
+        pageInfo{
+          hasNextPage,
+          endCursor
+        }
+      }
+
+    }
   `
 };
