@@ -1,10 +1,9 @@
 import {INIT_URL, SIGNOUT_USER_SUCCESS, USER_DATA, USER_TOKEN_SET} from "../../constants/ActionTypes";
 
 const INIT_STATE = {
-  token: JSON.parse(localStorage.getItem('token')),
+  token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null,
   initURL: '',
-  authUser: JSON.parse(localStorage.getItem('user')),
-
+  authUser: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
 };
 
 export default (state = INIT_STATE, action) => {
