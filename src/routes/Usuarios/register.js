@@ -2,7 +2,6 @@ import React from "react";
 import {Form, Button,Icon,Input} from "antd";
 import {Link} from 'react-router-dom'
 
-
 const Bancos = () => {
   return (
   	<div style={{padding: '30px' }}>

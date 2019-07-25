@@ -1,8 +1,8 @@
 import React from "react";
-import {Form, Table, Button,Icon , Input, Card, Col, Row } from "antd";
-import {Link} from 'react-router-dom';
-import axios from 'axios';
-import { baseURL } from 'util/environment';
+import {Form, Table, Button,Icon , Input, Card, Col, Row, message } from "antd";
+import { Link } from 'react-router-dom';
+import { CountryService } from "../../services/config.service";
+
 const columns = [
   {
     title: 'Nombre del pais',
@@ -15,41 +15,34 @@ const columns = [
     key: 'currency.name',
   },
   {
-    title: 'Estado',
-    dataIndex: 'state',
-    key: 'state',
+    title: 'Estados',
+    dataIndex: 'states',
+    key: 'states',
+    render: states => `${states.join(', ')}.`
   }  
 ];
 
 class Sucursales extends React.Component{
-  state ={
-    dataSource:[]
+  
+  state = {
+    countries: [],
+    hasNextPage: false,
+    endCursor: ""
   }
 
   componentDidMount(){
-    axios.post(baseURL,{
-      query:`
-        {
-          countries{
-            edges{
-              name,
-              currency{
-                name,
-                short,
-                id
-              },
-              states
-            }
-          }
-        }
-      `
-    }).then((res) => {
-      this.setState({
-        dataSource:res.data.data.countries.edges
-      })
-    }).catch((err) =>{
-      console.log(err.message)
-    })
+    this.getCountries();
+  }
+
+  getCountries = () => {
+    CountryService.getCountries()
+      .then(countries => {
+        this.setState({
+          countries: countries.edges,
+          hasNextPage: countries.pageInfo.hasNextPage,
+          endCursor: countries.pageInfo.endCursor
+        })
+      }, err => message.error(err.toString()));
   }
 
   render(){
@@ -84,7 +77,7 @@ class Sucursales extends React.Component{
         </Col>   
       </Row>             
       <div>
-        <Table columns={columns} dataSource={this.state.dataSource} rowKey={this.state.dataSource.id}/>       
+        <Table columns={columns} dataSource={this.state.countries} rowKey={this.state.countries.id}/>       
       </div>
     </div>
   );
