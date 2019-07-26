@@ -37,7 +37,7 @@ class Dashboard extends React.Component {
   }
 
   handleTabChange = (tabStatus) => {
-    this.getOrders(tabStatus,);
+    this.getOrders(tabStatus);
   }
 
   render() {

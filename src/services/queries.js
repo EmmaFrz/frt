@@ -1,4 +1,56 @@
+const pageInfo = `
+  pageInfo{
+    hasNextPage,
+    endCursor
+  }
+`;
+
 export default {
+  GET_BANKS: `
+    query getBanks($cursor: String, $limit: Int, $country: ID){
+      banks(cursor: $cursor, limit: $limit, country: $country){
+        edges{
+          id,
+          name,
+          country{
+            id,
+            name,
+            alpha2code
+          }
+        },
+        ${pageInfo}
+      }
+    }
+  `,
+  GET_BRANCH_OFFICES: `
+    query getBranchOffices($cursor: String, $limit: Int, $country: ID, $state: String){
+      branchOffices(cursor: $cursor, limit: $limit, country: $country, state: $state){
+        edges{
+          id,
+          name,
+          country{
+            id,
+            name,
+            alpha2code
+          },
+          state,
+          address,
+          office_number
+        },
+        ${pageInfo}
+      }
+    }
+`,
+  GET_CURRENCIES: `
+    query getCurrencies($cursor: String, $limit: Int){
+      currencies(cursor: $cursor, limit: $limit) {
+        edges{
+          id,name,short
+        },
+        ${pageInfo}
+      }
+    }
+  `,
   GET_USERS: `
     query getUsers{
       users{
@@ -22,10 +74,7 @@ export default {
           },
           states
         },
-        pageInfo{
-          hasNextPage,
-          endCursor
-        }
+        ${pageInfo}
       }
     }
   `,
@@ -76,10 +125,7 @@ export default {
         destination_amount,
         createdAt
       },
-      pageInfo{
-        hasNextPage,
-        endCursor
-      }
+      ${pageInfo}
     }
   }
 `

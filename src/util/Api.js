@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const apiUrl = 'http://localhost:8000/graphql';
+export const apiUrl = 'http://74.127.61.115:9900/graphql';
 
 export default axios.create({
   headers: {
