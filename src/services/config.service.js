@@ -2,9 +2,7 @@ import axios, { apiUrl } from '../util/Api';
 import queries from './queries';
 
 export class UserService {
-
   static async getUsers() {
-
     try {
       const users = await axios.post(apiUrl, {
         query: queries.GET_USERS
@@ -13,9 +11,7 @@ export class UserService {
     } catch (error) {
       throw new Error("Ha ocurrido un error al solicitar los usuarios.");
     }
-
   }
-
 }
 
 export class CountryService {
@@ -30,7 +26,7 @@ export class CountryService {
       });
       return countries.data.data.countries;
     } catch (error) {
-      throw new Error("Ha ocurrido un error al solicitar los usuarios.");
+      throw new Error("Ha ocurrido un error al solicitar los paises.");
     }
   }
 }
