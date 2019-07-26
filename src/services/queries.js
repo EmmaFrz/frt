@@ -27,7 +27,61 @@ export default {
           endCursor
         }
       }
-
     }
-  `
+  `,
+  GET_ORDERS: `
+  query getOrders($cursor: String, $limit: Int, $country: ID, $branchOffice: ID, $status: String ) {
+    orders(cursor: $cursor, limit: $limit, country: $country, branchOffice: $branchOffice, status: $status){
+      edges {
+        id,
+        sender {
+          id
+          email
+          phone
+          dni
+        },
+        receiver_dni,
+        receiver_phone,
+        status,
+        origin_country {
+          id
+          name
+          alpha2code
+          currency {
+            id
+            name
+            short
+          }
+        },
+        destination_country {
+          id
+          name
+          alpha2code
+          currency {
+            id
+            name
+            short
+          }
+        },
+        origin_bank{
+          id,
+          name
+        },
+        destination_bank{
+          id,
+          name
+        },
+        order_number,
+        amount,
+        destination_amount,
+        createdAt
+      },
+      pageInfo{
+        hasNextPage,
+        endCursor
+      }
+    }
+  }
+`
+
 };
